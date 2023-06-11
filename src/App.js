@@ -12,18 +12,15 @@ import {
 } from "@mui/material";
 import React from "react";
 import axios from "axios";
+import {API_URL} from "./config";
 
 function App() {
   const [categories, setCategories] = React.useState([]);
 
   React.useEffect(() => {
-    axios
-      .get(
-        "https://nadav-api-proj.redglacier-ead585f2.germanywestcentral.azurecontainerapps.io/categories"
-      )
-      .then(response => {
-        setCategories(response.data);
-      });
+    axios.get(`${API_URL}/categories`).then(response => {
+      setCategories(response.data);
+    });
   }, []);
 
   return (

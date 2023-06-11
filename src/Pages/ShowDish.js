@@ -2,6 +2,7 @@ import {CardMedia, Typography, Box} from "@mui/material";
 import axios from "axios";
 import React from "react";
 import {useParams} from "react-router-dom";
+import {API_URL} from "../config";
 
 function ShowDish() {
   const {id} = useParams();
@@ -12,13 +13,9 @@ function ShowDish() {
   }, [id]);
 
   function getDish(id) {
-    axios
-      .get(
-        `https://nadav-api-proj.redglacier-ead585f2.germanywestcentral.azurecontainerapps.io/dishes/${id}`
-      )
-      .then(response => {
-        setSingleDish(response.data);
-      });
+    axios.get(`${API_URL}/dishes/${id}`).then(response => {
+      setSingleDish(response.data);
+    });
   }
 
   return (

@@ -9,6 +9,7 @@ import {
 import {Link, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {API_URL} from "../config";
 
 function MainPage({categories}) {
   const params = useParams();
@@ -23,23 +24,15 @@ function MainPage({categories}) {
   }, [params.id]);
 
   function fetchDishes() {
-    axios
-      .get(
-        "http://nadav-api-proj.redglacier-ead585f2.germanywestcentral.azurecontainerapps.io/dishes"
-      )
-      .then(response => {
-        setDishes(response.data.sort((a, b) => a.category_id - b.category_id));
-      });
+    axios.get(`${API_URL}/dishes`).then(response => {
+      setDishes(response.data.sort((a, b) => a.category_id - b.category_id));
+    });
   }
 
   function filterByCategory(category_id) {
-    axios
-      .get(
-        `http://nadav-api-proj.redglacier-ead585f2.germanywestcentral.azurecontainerapps.io/dishes?category_id=${category_id}`
-      )
-      .then(response => {
-        setDishes(response.data);
-      });
+    axios.get(`${API_URL}/dishes?category_id=${category_id}`).then(response => {
+      setDishes(response.data);
+    });
   }
 
   return (
